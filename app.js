@@ -38,9 +38,16 @@ app.get('/feedback',(req,res)=>{
   res.render('feedback')
 })
 
+app.get('/form',(req,res)=>{ 
+  res.render('form')
+})
 
 app.get('/submitSuccess',(req,res)  =>{
   res.render('submitSuccess')
+})
+
+app.get('/DataVisualize',(req,res)  =>{
+  res.render('DataVisualize')
 })
 
 app.get('/submitFailed',(req,res)  =>{

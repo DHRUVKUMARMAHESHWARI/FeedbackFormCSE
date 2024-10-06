@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Account</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-    rel="stylesheet"
-/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="/css/style.css" rel="stylesheet">
 </head>
 <body class="bg-blue-50 sm:bg-gray-300 h-screen flex items-center justify-center">
@@ -43,19 +40,32 @@
 
         <!-- Year and Section in a single line -->
         <div class="flex space-x-4">
-              <!-- Year -->
-         <div class="w-1/2">
+          <!-- Year (Dropdown) -->
+          <div class="w-1/2">
             <label for="year" class="text-sm font-bold">Year</label>
-            <input type="text" id="year" name="year" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
-         </div>
+            <select id="year" name="year" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+              <option value="" disabled selected>Select Year</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
 
-        <!-- Section -->
-         <div class="w-1/2">
+          <!-- Section (Dropdown) -->
+          <div class="w-1/2">
             <label for="section" class="text-sm font-bold">Section</label>
-            <input type="text" id="section" name="section" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
-         </div>
+            <select id="section" name="section" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+              <option value="" disabled selected>Select Section</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+            </select>
+          </div>
         </div>
- 
 
         <!-- Submit button -->
         <div>

@@ -34,4 +34,21 @@ app.get('/login',(req,res)=>{
   res.render('login')
 })
 
+app.get('/feedback',(req,res)=>{ 
+  res.render('feedback')
+})
+
+
+app.get('/submitSuccess',(req,res)  =>{
+  res.render('submitSuccess')
+})
+
+app.get('/submitFailed',(req,res)  =>{
+  res.render('submitFailed')
+
+})
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
+
 server.listen(process.env.PORT || 3000);

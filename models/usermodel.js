@@ -12,6 +12,15 @@ var userSchema = mongoose.Schema({
         required: true,
         type:string,
     },
+    year:{
+        required:true,
+        type:Number,
+    },
+    section:{
+        required:true,
+        type:Number,
+    }
+
 })
 
 const db = mongoose.model('user',userSchema);

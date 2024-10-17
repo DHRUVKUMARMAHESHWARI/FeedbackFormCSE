@@ -51,4 +51,8 @@ app.get('/profile', (req, res) => {
   res.render('profile');
 });
 
+app.get("/form",(req,res)=>{
+  res.render("form")
+})
+
 server.listen(process.env.PORT || 3000);

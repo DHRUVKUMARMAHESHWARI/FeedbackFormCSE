@@ -1,288 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FEEDBACK UI</title>
+  <title>Document</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-    /* Sidebar transition for smooth opening/closing */
-    .sidebar-closed {
-      transform: translateX(-100%);
+    html,
+    body {
+      position: relative;
+      height: 100%;
     }
 
-    /* Dark mode styles */
-    .dark-mode {
-      background-color: #121615;
-      color: rgb(255, 255, 255);
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
     }
 
-    .dark-mode .navbar,
-    .dark-mode .maincontent {
-      background-color: #000000;
-      color: rgb(247, 246, 246);
-    }
-    .dark-mode .sidebar{
-      background-color: rgb(61, 59, 59);
-      color: white;
-      border-right: white;
+    .swiper {
+      width: 100%;
+      height: 100%;
     }
 
-    /* User Info Section */
-    .user-info {
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Feedback form */
-    .feedbackdiv {
-      max-height: 500px; /* Adjust this value for your preferred height */
-      overflow-y: auto; /* Enable vertical scroll */
-    }
-
-    /* Dropdown styles */
-    .dropdown {
-      display: none; /* Start hidden */
-    }
-
-    .dropdown.show {
-      display: block; /* Show when active */
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
-<body class="flex h-screen bg-gray-100 transition duration-500">
 
-  <!-- Sidebar (Responsive on mobile) -->
-  <div id="sidebar" class="sidebar w-64 bg-white h-full shadow-md fixed md:relative transform md:translate-x-0 sidebar-closed md:block">
-    <div class="p-4 bg-gray-800 text-white">
-      <h1 class="text-xl font-semibold">Dashboard</h1>
-    </div>
+<body>
+  <div class="main flex bg-red-300 w-full h-screen">
+    <div class="left bg-red-500 h-full w-[20%] "></div>
+    <div class="right relative  h-full w-[80%] ">
+      <div class="top_nav w-[95%] h-[8%] bg-green-800 mt-4 ml-7"></div>
 
-    <nav class="mt-4">
-        <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 text-2xl font-semibold" onclick="toggleDropdown('homeDropdown')">Home <span class="text-gray-500"><i class="ri-arrow-down-wide-fill font-semibold"></i></span></a>
-        <div id="homeDropdown" class="dropdown px-4">
-          <a href="#" class="block py-2 text-gray-600 hover:bg-gray-200 dropdown-item">Sub Item 1</a>
-          <a href="#" class="block py-2 text-gray-600 hover:bg-gray-200 dropdown-item">Sub Item 2</a>
-        </div>
-        <!-- More sidebar links here -->
-    </nav>
+      <div class="right_center m-8 mt-8 ml-26 h-[50%] w-[70%] bg-blue-500">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
 
-    <!-- User info at the bottom-left -->
-    <div class="absolute bottom-4 left-0 w-full flex justify-start items-center px-4">
-      <div class="border p-3 rounded-lg flex items-center space-x-3 w-full bg-white hover:bg-gray-200 transition duration-200">
-        <img src="https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?w=500&auto=format&fit=crop&q=60" alt="User" class="w-10 h-10 rounded-full">
-        <div class="text-gray-700 user-info">
-          <h4 class="font-semibold text-md">Gajendra ...</h4>
-          <p class="text-sm text-gray-500">gajendra@...</p>
+            <div class="swiper-slide relative">
+              <!-- Feedback Form -->
+              <form action="/submitSuccess" method="get" class="space-y-4">
+                <!-- Feedback Questions -->
+                <div class="overflow-x-auto">
+                  <table class="min-w-full table-auto text-center border-collapse border border-gray-300">
+                    <thead class="bg-gray-200">
+                      <tr>
+                        <th class="px-4 py-2 border">Criteria</th>
+                        <th class="px-2 py-2 border">Excellent</th>
+                        <th class="px-2 py-2 border">Good</th>
+                        <th class="px-2 py-2 border">Average</th>
+                        <th class="px-2 py-2 border">Poor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Repeatable Form Row -->
+                      <% const feedbackCriteria=["Quality of Food"]; %>
+                        <% feedbackCriteria.forEach((criteria)=> { %>
+                          <tr class="border">
+                            <td class="px-4 py-2 border text-left">
+                              <%= criteria %>
+                            </td>
+                            <% for(let i=0; i<4; i++) { %>
+                              <td class="px-2 py-2 border">
+                                <input type="radio" name="<%= criteria %>" value="<%= i %>"
+                                  class="form-radio text-blue-600" required>
+                              </td>
+                              <% } %>
+                          </tr>
+                          <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+
+              </form>
+
+            </div>
+            
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+            
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
         </div>
       </div>
+
+      <div class="right_nav bg-yellow-600 h-[80%] w-[15%] absolute right-[35px] top-[115px]"></div>
+
+      <div class="progressbar  h-12 w-[30%] ml-8 mt-28 relative">
+        <h5 class="text-xl">Progress Bar</h5>
+        <div class="progress bg-green-600 mt-2 rounded-2xl h-[12px] w-[90%] "></div>
+      </div>
+
+      <button class="bg-yellow-400 left-[65%] mt-[-2%] absolute p-2 rounded-xl">Submit</button>
     </div>
   </div>
 
-  <!-- Main content -->
-  <div class="maincontent flex flex-col w-full ml-64 md:ml-0 p-6 transition duration-500">
-    
-    <!-- Top Navbar -->
-    <div class="flex justify-between items-center bg-red-600 p-6" style="padding-top: 20px;">
-      <h2 class="text-2xl font-semibold">Hello, Gajendra</h2>
 
-      <!-- Dark mode toggle button -->
-      <button id="darkModeToggle" class="p-2 bg-gray-800 text-white rounded-md">
-        <i class="ri-moon-line"></i>
-      </button>
-    </div>
-
-    <!-- Feedback form centered in the page -->
-    <div class="centerdivfeed p-4 flex-grow">
-      <form id="feedbackForm">
-        <div class="feedbackdiv" id="feedbackDiv">
-          <table class="table-auto w-full text-left">
-            <thead>
-              <tr>
-                <th class="p-2">Question</th>
-                <th class="p-2 text-center">Totally Disagree</th>
-                <th class="p-2 text-center">Disagree</th>
-                <th class="p-2 text-center">Agree</th>
-                <th class="p-2 text-center">Totally Agree</th>
-                <th class="p-2 text-center">Not Applicable</th>
-              </tr>
-            </thead>
-            <tbody id="questionTable">
-              <tr>
-                <td class="p-2">The help desk staff was knowledgeable and able to assist me.</td>
-                <td class="p-2 text-center"><input type="radio" name="q3" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q3" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q3" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q3" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q3" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">My issue was resolved in a timely manner.</td>
-                <td class="p-2 text-center"><input type="radio" name="q4" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q4" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q4" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q4" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q4" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">The help desk representative was polite and courteous.</td>
-                <td class="p-2 text-center"><input type="radio" name="q5" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q5" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q5" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q5" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q5" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">I felt supported throughout the process.</td>
-                <td class="p-2 text-center"><input type="radio" name="q6" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q6" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q6" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q6" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q6" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">The information provided was clear and easy to understand.</td>
-                <td class="p-2 text-center"><input type="radio" name="q7" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q7" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q7" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q7" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q7" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">I would recommend the help desk to others.</td>
-                <td class="p-2 text-center"><input type="radio" name="q8" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q8" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q8" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q8" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q8" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">I was kept informed about the status of my issue.</td>
-                <td class="p-2 text-center"><input type="radio" name="q9" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q9" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q9" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q9" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q9" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">Overall, I am satisfied with the help desk service.</td>
-                <td class="p-2 text-center"><input type="radio" name="q10" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q10" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q10" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q10" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q10" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">The help desk met my expectations.</td>
-                <td class="p-2 text-center"><input type="radio" name="q11" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q11" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q11" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q11" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q11" value="5"></td>
-              </tr>
-              <tr>
-                <td class="p-2">I would use the help desk again if needed.</td>
-                <td class="p-2 text-center"><input type="radio" name="q12" value="1"></td>
-                <td class="p-2 text-center"><input type="radio" name="q12" value="2"></td>
-                <td class="p-2 text-center"><input type="radio" name="q12" value="3"></td>
-                <td class="p-2 text-center"><input type="radio" name="q12" value="4"></td>
-                <td class="p-2 text-center"><input type="radio" name="q12" value="5"></td>
-              </tr>
-              
-              <!-- Questions will go here -->
-
-              
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Progress bar and Submit button -->
-        <div class="mt-12 flex justify-between items-center">
-          <div>
-            <span>Progress bar</span>
-            <div class="w-48 bg-gray-200 rounded-full h-2.5 mt-2">
-              <div id="progressBar" class="bg-blue-300 h-2.5 rounded-full" style="width: 0%;"></div>
-            </div>
-          </div>
-          <button id="submitBtn" type="button" class="p-2 bg-blue-500 text-white rounded-md">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- JavaScript for Sidebar Toggle, Dropdowns, Dark Mode, and Auto-Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    const form = document.getElementById('feedbackForm');
-    const progressBar = document.getElementById('progressBar');
-    const feedbackDiv = document.getElementById('feedbackDiv');
-    const inputs = form.querySelectorAll('input[type="radio"]');
-    const answeredQuestions = new Set();
-    const submitBtn = document.getElementById('submitBtn');
-    const questionTable = document.getElementById('questionTable');
-
-    // Define question limit for auto-scrolling
-    const scrollLimit = 2; // Adjust this value based on your requirement
-
-    // Toggle dark mode
-    darkModeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
+    var swiper = new Swiper(".mySwiper", {
+      pagination: {
+        el: ".swiper-pagination",
+        type: "progressbar",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
     });
-
-    // Update progress and auto-scroll to the next question
-    inputs.forEach((input) => {
-      input.addEventListener('change', () => {
-        if (answeredQuestions.has(input.name)) return; // Already answered this question
-        answeredQuestions.add(input.name); // Mark question as answered
-        updateProgress();
-        autoScrollToNext();
-      });
-    });
-
-    // Function to update progress bar
-    function updateProgress() {
-      const totalQuestions = 10; // Update this if you change the number of questions
-      const percentage = (answeredQuestions.size / totalQuestions) * 100;
-      progressBar.style.width = percentage + '%';
-    }
-
-    // Function to auto-scroll to the next question
-    function autoScrollToNext() {
-      const totalQuestions = questionTable.querySelectorAll('tr').length;
-
-      // Only auto-scroll if the number of questions exceeds the scroll limit
-      if (totalQuestions > scrollLimit) {
-        // Find the last answered question
-        const lastAnswered = form.querySelector('input[type="radio"]:checked').closest('tr');
-        const nextQuestion = lastAnswered.nextElementSibling;
-
-        if (nextQuestion) {
-          // Smoothly scroll the form to the next question
-          nextQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-    }
-
-    // Submit button functionality
-    submitBtn.addEventListener('click', () => {
-      if (answeredQuestions.size < 10) { // Adjust to match the number of questions
-        alert('Please complete all questions before submitting.');
-      } else {
-        alert('Feedback submitted successfully!');
-        // Reset the form
-        form.reset();
-        answeredQuestions.clear();
-        progressBar.style.width = '0%';
-      }
-    });
-
-    // Function to toggle the dropdown menu
-    function toggleDropdown(dropdownId) {
-      const dropdown = document.getElementById(dropdownId);
-      dropdown.classList.toggle('show'); // Toggle the 'show' class
-    }
   </script>
 </body>
+
 </html>

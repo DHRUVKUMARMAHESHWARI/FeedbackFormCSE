@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+
+<body class="bg-gray-100 font-sans h-screen flex overflow-hidden">
+    <!-- Nav Bar -->
+<%- include('partials/navBar.ejs') %>
+    <!-- Main Content -->
+    <main class="flex-1 p-10 overflow-y-auto">
+        <h1 class="text-3xl text-center font-bold mb-8">DATA VISUALIZATION</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Course Organization and Delivery -->
+            <div class="bg-white p-5 rounded shadow">
+                <h3 class="text-lg font-semibold mb-4">Course Organization and Delivery</h3>
+                <canvas id="genderPreferencesChart"></canvas>
+            </div>
+
+            <!-- Teacher Effectiveness -->
+            <div class="bg-white p-5 rounded shadow">
+                <h3 class="text-lg font-semibold mb-4">Teacher Effectiveness</h3>
+                <canvas id="teacherEffectivenessChart"></canvas>
+            </div>
+
+            <!-- Student Learning Experience -->
+            <div class="bg-white p-5 rounded shadow">
+                <h3 class="text-lg font-semibold mb-4">Student Learning Experience</h3>
+                <canvas id="studentExperienceChart"></canvas>
+            </div>
+
+            <!-- Exams and Evaluation -->
+            <div class="bg-white p-5 rounded shadow">
+                <h3 class="text-lg font-semibold mb-4">Exams and Evaluation</h3>
+                <canvas id="examsEvaluationChart"></canvas>
+            </div>
+
+            <!-- General Course Questions -->
+            <div class="bg-white p-5 rounded shadow">
+                <h3 class="text-lg font-semibold mb-4">General Course Questions</h3>
+                <canvas id="generalQuestionsChart"></canvas>
+            </div>
+
+            <!-- Tutorial & Lab Components -->
+            <div class="bg-white p-5 rounded shadow">
+                <h3 class="text-lg font-semibold mb-4">Tutorial & Lab Components</h3>
+                <canvas id="tutorialLabChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        // Gender Preferences Chart
+        new Chart(document.getElementById('genderPreferencesChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Flavor', 'Chocolate', 'Strawberry', 'Vanilla'],
+                datasets: [{
+                    label: 'Female',
+                    data: [40, 35, 25, 30],
+                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                }, {
+                    label: 'Male',
+                    data: [30, 25, 35, 40],
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Teacher Effectiveness Chart
+        new Chart(document.getElementById('teacherEffectivenessChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4'],
+                datasets: [{
+                    label: 'Effectiveness',
+                    data: [65, 59, 80, 81],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Student Learning Experience Chart
+        new Chart(document.getElementById('studentExperienceChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Very Good', 'Good', 'Average', 'Poor'],
+                datasets: [{
+                    data: [30, 50, 15, 5],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+
+        // Exams and Evaluation Chart
+        new Chart(document.getElementById('examsEvaluationChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Excellent', 'Good', 'Average', 'Poor'],
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+
+        // General Course Questions Chart
+        new Chart(document.getElementById('generalQuestionsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5'],
+                datasets: [{
+                    label: 'Responses',
+                    data: [65, 59, 80, 81, 56],
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Tutorial & Lab Components Chart
+        new Chart(document.getElementById('tutorialLabChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Component 1', 'Component 2', 'Component 3', 'Component 4', 'Component 5'],
+                datasets: [{
+                    label: 'Series 1',
+                    data: [65, 59, 90, 81, 56],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }, {
+                    label: 'Series 2',
+                    data: [28, 48, 40, 19, 96],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+            },
+            options: {
+                responsive: true,
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

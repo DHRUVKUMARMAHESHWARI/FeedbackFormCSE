@@ -1,0 +1,67 @@
+<nav
+  class="bg-gray-900 flex flex-col px-4 py-6 sm:p-2 max-h-fit flex md:px-10 md:py-10 items-start justify-top gap-4 md:gap-10 md:w-64 text-white space-y-6 h-screen lg:min-h-screen">
+  <div class="flex justify-between w-full">
+    <!-- Dashboard Title -->
+    <div class="text-xl font-bold">Dashboard</div>
+
+    <!-- Hamburger Menu Icon (Visible on small screens) -->
+    <button id="hamburger" class="block md:hidden focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Navigation Items (Initially hidden on small screens) -->
+  <nav id="menu" class="space-y-2 md:space-y-3 w-full hidden md:block">
+    <a href="#"
+      class="flex items-center space-x-3 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">
+      <span class="text-lg">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="#"
+      class="flex items-center space-x-3 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">
+      <span class="text-lg">📊</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="#"
+      class="flex items-center space-x-3 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">
+      <span class="text-lg">👤</span>
+      <span>Profile</span>
+    </a>
+    <a href="#"
+      class="flex items-center space-x-3 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">
+      <span class="text-lg">⚙️</span>
+      <span>Settings</span>
+    </a>
+
+    <!-- Logout Button -->
+    <div class="w-full mt-4">
+      <a href="#"
+        class="flex items-center space-x-3 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">
+        <span class="text-lg">🚪</span>
+        <span>Logout</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- User Info Section (Visible only on larger screens) -->
+  <div class="mt-auto pt-84 pl-8 hidden sm:block">
+    <div class="flex items-center ">
+      <div class="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
+      <span>user</span>
+    </div>
+  </div>
+</nav>
+
+<!-- JavaScript to Toggle Hamburger Menu -->
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+
+  hamburger.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>

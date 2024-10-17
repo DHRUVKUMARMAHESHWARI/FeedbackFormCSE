@@ -1,13 +1,15 @@
-const mongoose = require('mongoose')
-const dbgr = require("debug")("development:mongoose")
-mongoose.connect("mongodb:127.0.0.1:27017/FeedBackFormCSE")
-.then(function(){
-    dbgr("connected to mongo");
-})
-.catch(function(err){
-    dbgr(err)
-})
+const mongoose = require('mongoose');
+const dbgr = require('debug')('development:mongoose');
 
-let db = mongoose.connection;
+mongoose.connect("mongodb://127.0.0.1:27017/FeedBackFormCSE")
+  .then(() => {
+    console.log("Connected to MongoDB");
+    dbgr("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err);
+    dbgr(err);
+  });
 
-module.exports = db;
+  let db = mongoose.connection;
+  module.exports = db;  

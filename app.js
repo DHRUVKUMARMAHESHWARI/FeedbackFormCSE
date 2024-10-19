@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var db = require('./config/mongoose-connection')
+const weatherMiddleware = require('./middlewares/time&weather'); // Import the middleware
 
 const bcrypt=require("bcrypt");
 const jwt = require('jsonwebtoken');
@@ -123,6 +124,10 @@ function isLogedIn(req, res, next) {
     next();  // Proceed to the next middleware or route handler
   });
 }
+
+app.get('/homepage',weatherMiddleware,(req,res)=>{
+  res.render('homepage')
+})
 
 app.get('/feedback',(req,res)=>{ 
   res.render('feedback')

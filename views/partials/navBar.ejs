@@ -1,5 +1,18 @@
 <nav
   class="bg-gray-900 flex flex-col px-4 py-6 sm:p-2 max-h-fit flex md:px-10 md:py-10 items-start justify-top gap-4 md:gap-10 md:w-64 text-white space-y-6 h-screen lg:min-h-screen">
+  <style>
+    @media (min-width: 768px) {
+      #menu {
+        height: calc(100vh - 6rem); /* Adjust the 6rem based on your specific layout needs */
+      }
+      @media (min-width: 1024px) {
+      #menu {
+        height: 100%;
+      }
+    }
+    }
+    
+  </style>
   <div class="flex justify-between w-full">
     <!-- Dashboard Title -->
     <div class="text-xl font-bold">Dashboard</div>

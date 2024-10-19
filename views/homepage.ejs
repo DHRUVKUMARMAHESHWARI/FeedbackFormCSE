@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans h-screen flex overflow-hidden sm:h-fit flex-col md:flex-row lg:flex-row">
+    <%- include('partials/navBar.ejs') %>
+
+    <!-- Main Content -->
+<main class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-100">
+
+    <!-- Greeting Section -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+      <div class="mb-4 md:mb-0">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold"><%= greeting %>, Ariel</h1>
+        <p class="text-gray-600 text-sm sm:text-base lg:text-lg">Have a fruitful day ahead! 🌸</p>
+      </div>
+      <div>
+        <h2 id="time" class="text-2xl sm:text-3xl lg:text-4xl font-semibold"><%= currentTime %> </h2>
+      </div>
+    </div>
+  
+    <!-- Dashboard Cards -->
+    <div class="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap gap-6">
+  
+      <!-- Task List (Open) -->
+      <div class="flex-1 bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 w-full sm:w-[48%] lg:w-[30%]">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4">Open</h3>
+        <div class="space-y-4">
+          <div class="p-4 bg-blue-100 rounded-lg">
+            <h4 class="font-semibold">#53 Load-Up</h4>
+            <p class="text-sm sm:text-base text-gray-600">Due: 12/06/2020</p>
+          </div>
+          <div class="p-4 bg-blue-100 rounded-lg">
+            <h4 class="font-semibold">#54 Clean-Up</h4>
+            <p class="text-sm sm:text-base text-gray-600">Due: 31/06/2020</p>
+          </div>
+          <div class="p-4 bg-blue-100 rounded-lg">
+            <h4 class="font-semibold">#55 Finish-Up</h4>
+            <p class="text-sm sm:text-base text-gray-600">Due: 11/07/2020</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Description -->
+      <div class="flex-1 bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 w-full sm:w-[48%] lg:w-[30%]">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4">Description</h3>
+        <p class="text-gray-700 text-sm sm:text-base lg:text-lg">
+          In hac habitasse platea dictumst. Vivamus sit ut leo amet. High priority. Due: 12/06/2020
+        </p>
+      </div>
+  
+      <!-- Status -->
+      <div class="flex-1 bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 w-full lg:w-[30%]">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4">Status</h3>
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-base sm:text-lg lg:text-xl">In Progress</p>
+          <p class="text-sm text-gray-500">5 days left</p>
+        </div>
+        <div class="mt-4 text-sm text-gray-600">
+          <p>Due Date: 12/06/2020</p>
+        </div>
+      </div>
+  
+      <div class="bg-white p-8 rounded-lg shadow-lg max-w-xs w-full">
+        <h1 class="text-xl font-bold text-center mb-4">Current Weather & Time</h1>
+    
+        <!-- Weather Section -->
+        <div class="text-center mb-6">
+          <% if (weather) { %>
+            <img src="<%= weatherImage %>" alt="Weather Icon" class="mx-auto mb-2 w-16 h-16">
+            <div class="text-3xl font-semibold mb-2"><%= weather.main.temp %>°C</div>
+            <div class="text-lg font-medium text-gray-600"><%= weather.weather[0].description %></div>
+            <div class="text-sm text-gray-500 mt-2">
+              <%= weather.name %>, <%= weather.sys.country %>
+            </div>
+          <% } else { %>
+            <p class="text-red-500">Unable to fetch weather data.</p>
+          <% } %>
+        </div>
+    
+        <!-- Time Section -->
+        <div class="text-center mb-4">
+          <div id="time" class="text-2xl font-semibold mt-4"><%= currentTime %></div>
+        </div>
+    
+      </div>
+  
+  </main>
+  
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+</body>
+</html>

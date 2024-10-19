@@ -36,54 +36,56 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-app.post('/signup', (req, res) => {
-  let { email, year, section, password } = req.body;
+// app.post('/signup', (req, res) => {
+//   let { email, year, section, password } = req.body;
 
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) return res.status(500).send('Server error');
+//   bcrypt.genSalt(10, (err, salt) => {
+//     if (err) return res.status(500).send('Server error');
   
-    bcrypt.hash(password, salt, async function(err, hash) {
-      if (err) return res.status(500).send('Server error');
+//     bcrypt.hash(password, salt, async function(err, hash) {
+//       if (err) return res.status(500).send('Server error');
+//       try {
+//         const user = await userModel.create({
+//           email,
+//           year,
+//           section,
+//           password: hash
+//         });
   
-      try {
-        const user = await userModel.create({
-          email,
-          year,
-          section,
-          password: hash
-        });
-  
-        let token = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET);
-        res.cookie("token", token);
-        res.redirect("/login");
-      } catch (err) {
-        res.status(500).send('Database error');
-      }
-    });
-  });
-  
-});
+//         let token = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET);
+//         res.cookie("token", token);
+//         res.redirect("/login");
+//       } catch (err) {
+//         res.status(500).send('Database error');
+//       }
+//     });
+//   });
+// });
+
+// app.post("/signup", async (req, res) => {
+//   const { roll, password } = req.body;
+//   let user = await userModel.findOne({ Enroll:roll })
+//   if(user) console.log(roll,password,user.Password)
+//   else console.log(roll,password,user.Password);
+// })
 
 
 app.get('/login',(req,res)=>{ 
   res.render('login')
 })
-
 app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
+  const { roll, password } = req.body;
   try {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ Enroll:roll });
     if (!user) {
       return res.status(400).send("User not found. Please sign up."); 
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.Password);
     if (!isMatch) {
-      return res.status(400).send("Invalid email or password.");
+      return res.send(password,user.Password);
     }
-
-    const token = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    console.log(password,user.Password);
+    const token = jwt.sign({ email:user.Email, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.cookie("token", token);
     return res.redirect("/profile");  // <== 'return' ensures no further code execution

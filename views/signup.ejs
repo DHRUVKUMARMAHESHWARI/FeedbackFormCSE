@@ -18,30 +18,29 @@
         <img src="https://i.pinimg.com/564x/a7/f3/df/a7f3dfd811a4c2288148244e26b390a1.jpg" alt="Character" class="w-full h-fit objec-top object-cover mx-auto">
       </div>
     </div>
-    
     <!-- Right side (form) -->
     <div class="w-full lg:w-1/2 py-16 px-10 bg-white">
-      <h2 class="text-3xl font-bold text-center mb-6">Create Account</h2>
+      <h2 class="text-3xl font-bold text-center mb-6">Login</h2>
       
       <!-- Form -->
       <form action="/signup" method="POST" class="space-y-4">
         
         <!-- Email -->
         <div>
-          <label for="email" class="text-sm font-bold">Email address</label>
-          <input type="email" id="email" name="email" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+          <label for="email" class="text-sm font-bold">Enrollment Number</label>
+          <input type="text"  name="roll" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
         </div>
 
         <!-- Password -->
         <div>
           <label for="password" class="text-sm font-bold">Password</label>
-          <input type="password" id="password" name="password" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+          <input type="password"  name="password" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
         </div>
 
         <!-- Year and Section in a single line -->
         <div class="flex space-x-4">
           <!-- Year (Dropdown) -->
-          <div class="w-1/2">
+          <!-- <div class="w-1/2">
             <label for="year" class="text-sm font-bold">Year</label>
             <select id="year" name="year" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
               <option value="" disabled selected>Select Year</option>
@@ -50,10 +49,10 @@
               <option value="3">3</option>
               <option value="4">4</option>
             </select>
-          </div>
+          </div> -->
 
           <!-- Section (Dropdown) -->
-          <div class="w-1/2">
+          <!-- <div class="w-1/2">
             <label for="section" class="text-sm font-bold">Section</label>
             <select id="section" name="section" class="w-full px-4 py-2 mt-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
               <option value="" disabled selected>Select Section</option>
@@ -64,13 +63,13 @@
               <option value="E">E</option>
               <option value="F">F</option>
             </select>
-          </div>
+          </div> -->
         </div>
 
         <!-- Submit button -->
         <div>
           <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors">
-            Create account
+            Submit
           </button>
         </div>
 

@@ -10,6 +10,5 @@ mongoose.connect("mongodb://127.0.0.1:27017/FeedBackFormCSE")
     console.error("Failed to connect to MongoDB:", err);
     dbgr(err);
   });
-
   let db = mongoose.connection;
-  module.exports = db;  
+  module.exports = db;

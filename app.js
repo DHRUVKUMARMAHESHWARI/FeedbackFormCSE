@@ -11,7 +11,6 @@ const userModel=require("./models/usermodel");
 
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -31,7 +30,6 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 app.get('/signup', (req, res) => {
   res.render('signup');
@@ -43,6 +41,7 @@ app.get('/login',(req,res)=>{
 
 app.post('/login', async (req, res) => {
   const { roll, password } = req.body;
+  console.log(roll);
   try {
     const user = await userModel.findOne({ Enroll: roll });
     console.log("Password:", password, "Hashed Password:", user.Password);
@@ -57,7 +56,7 @@ app.post('/login', async (req, res) => {
     console.log(password,user.Password);
     const token = jwt.sign(
       {
-        email:user.Email, userId: user._id, name:user.StudentName},
+        email:user.Email, userId: user._id, name:user.StudentName , rollno:roll},
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );

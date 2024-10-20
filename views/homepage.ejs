@@ -6,11 +6,11 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans h-screen flex overflow-hidden sm:h-fit flex-col md:flex-row lg:flex-row">
+<body class="bg-gray-100 flex justify-left flex-col items-left min-h-screen md:flex-row">
     <%- include('partials/navBar.ejs') %>
 
     <!-- Main Content -->
-<main class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-100">
+<main class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-100 ">
 
     <!-- Greeting Section -->
     <div class="flex flex-col md:flex-row justify-between items-center mb-6">
@@ -19,7 +19,7 @@
         <p class="text-gray-600 text-sm sm:text-base lg:text-lg">Have a fruitful day ahead! 🌸</p>
       </div>
       <div>
-        <h2 id="time" class="text-2xl sm:text-3xl lg:text-4xl font-semibold"><%= currentTime %> </h2>
+        <img src="/images/SISTec_Logo.png" class="h-18 w-16 object-fit object-center" alt="">
       </div>
     </div>
   

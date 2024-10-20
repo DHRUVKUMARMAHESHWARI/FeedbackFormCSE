@@ -14,7 +14,7 @@ var userSchema = mongoose.Schema({
     },
     section:{
         required:true,
-        type:Number,
+        type:String,
     }
 
 })

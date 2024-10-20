@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var db = require('./config/mongoose-connection')
 const isLogedIn = require('./middlewares/isLogedIn')
 
-const bcrypt=require("bcrypt");
+const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const userModel=require("./models/usermodel");
@@ -37,46 +37,12 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-// app.post('/signup', (req, res) => {
-//   let { email, year, section, password } = req.body;
-
-//   bcrypt.genSalt(10, (err, salt) => {
-//     if (err) return res.status(500).send('Server error');
-  
-//     bcrypt.hash(password, salt, async function(err, hash) {
-//       if (err) return res.status(500).send('Server error');
-//       try {
-//         const user = await userModel.create({
-//           email,
-//           year,
-//           section,
-//           password: hash
-//         });
-  
-//         let token = jwt.sign({ email, userId: user._id }, process.env.JWT_SECRET);
-//         res.cookie("token", token);
-//         res.redirect("/login");
-//       } catch (err) {
-//         res.status(500).send('Database error');
-//       }
-//     });
-//   });
-// });
-
-// app.post("/signup", async (req, res) => {
-//   const { roll, password } = req.body;
-//   let user = await userModel.findOne({ Enroll:roll })
-//   if(user) console.log(roll,password,user.Password)
-//   else console.log(roll,password,user.Password);
-// })
-
-
 app.get('/login',(req,res)=>{ 
   res.render('login')
 })
+
 app.post('/login', async (req, res) => {
   const { roll, password } = req.body;
-  // console.log(roll,password);
   try {
     const user = await userModel.findOne({ Enroll: roll });
     console.log("Password:", password, "Hashed Password:", user.Password);
@@ -86,25 +52,24 @@ app.post('/login', async (req, res) => {
     const isMatch = password === user.Password;
 
     if (!isMatch) {
-      return res.send(password);
+      return res.send("Password did not match !!");
     }
     console.log(password,user.Password);
     const token = jwt.sign(
       {
-        email:user.Email, userId: user._id },
+        email:user.Email, userId: user._id, name:user.StudentName},
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );
 
     res.cookie("token", token);
-    return res.redirect("/profile");  // <== 'return' ensures no further code execution
+    return res.redirect("/profile");
 
   } catch (error) {
     console.log("Error during login:", error);
     return res.send("Server error");
   }
 });
-
 
 app.get('/logout',isLogedIn,(req,res)=>{
   res.redirect("login")
@@ -115,7 +80,5 @@ app.post("/logout",isLogedIn, (req, res) => {
   res.clearCookie("token");
   res.redirect("/login");
 });
-
-
 
 server.listen(process.env.PORT);

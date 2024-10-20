@@ -1,4 +1,5 @@
 // Middleware to check if user is logged in
+const jwt = require('jsonwebtoken');
 function isLogedIn(req, res, next) {
     const token = req.cookies.token;
   
@@ -14,5 +15,5 @@ function isLogedIn(req, res, next) {
       next();  // Proceed to the next middleware or route handler
     });
   }
-
-  module.exports = isLogedIn
+  
+module.exports = isLogedIn

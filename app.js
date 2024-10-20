@@ -76,24 +76,32 @@ app.get('/login',(req,res)=>{
 })
 app.post('/login', async (req, res) => {
   const { roll, password } = req.body;
+  // console.log(roll,password);
   try {
-    const user = await userModel.findOne({ Enroll:roll });
+    const user = await userModel.findOne({ Enroll: roll });
+    console.log("Password:", password, "Hashed Password:", user.Password);
     if (!user) {
-      return res.status(400).send("User not found. Please sign up."); 
+      return res.send("User not found. Please sign up.");
     }
-    const isMatch = await bcrypt.compare(password, user.Password);
+    const isMatch = password === user.Password;
+
     if (!isMatch) {
-      return res.send(password,user.Password);
+      return res.send(password);
     }
     console.log(password,user.Password);
-    const token = jwt.sign({ email:user.Email, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(
+      {
+        email:user.Email, userId: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
 
     res.cookie("token", token);
     return res.redirect("/profile");  // <== 'return' ensures no further code execution
 
   } catch (error) {
-    console.error("Error during login:", error);
-    return res.status(500).send("Server error");
+    console.log("Error during login:", error);
+    return res.send("Server error");
   }
 });
 

@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var db = require('./config/mongoose-connection')
-const weatherMiddleware = require('./middlewares/time&weather'); // Import the middleware
+const isLogedIn = require('./middlewares/isLogedIn')
 
 const bcrypt=require("bcrypt");
 const jwt = require('jsonwebtoken');
@@ -98,8 +98,8 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.get('/logout',(req,res)=>{
-  res.render("logout")
+app.get('/logout',isLogedIn,(req,res)=>{
+  res.redirect("login")
 })
 
 // Logout route
@@ -108,45 +108,6 @@ app.post("/logout",isLogedIn, (req, res) => {
   res.redirect("/login");
 });
 
-// Middleware to check if user is logged in
-function isLogedIn(req, res, next) {
-  const token = req.cookies.token;
 
-  if (!token) {
-    return res.status(401).send("Access denied. Please log in.");
-  }
 
-  jwt.verify(token, "key", (err, decoded) => {
-    if (err) {
-      return res.status(401).send("Invalid token.");  // Ensure response is only sent once
-    }
-    req.user = decoded;  // Attach user data to request object
-    next();  // Proceed to the next middleware or route handler
-  });
-}
-
-app.get('/homepage',weatherMiddleware,(req,res)=>{
-  res.render('homepage')
-})
-
-app.get('/feedback',(req,res)=>{ 
-  res.render('feedback')
-})
-
-app.get('/form',(req,res)=>{ 
-  res.render('form')
-})
-
-app.get('/DataVisualize',(req,res)  =>{
-  res.render('DataVisualize')
-})
-
-app.get('/profile', (req, res) => {
-  res.render('profile');
-});
-
-app.get("/form",(req,res)=>{
-  res.render("form")
-})
-
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT);
